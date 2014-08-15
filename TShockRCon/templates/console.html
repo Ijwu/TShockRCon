@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% set server_name = "test" %}
+{% set user_name = "test" %}
+
+{% block body %}
+    <div id="row">
+        {{ macros.logo_with_user(user_name) }}
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="block">
+                <div class="navtop">
+                    Navigation
+                </div>
+                <div class="navcontainer">
+                    <ul>
+                        <li><a href="/status"><img src="../static/images/icons/computer.png" /> Server Info</a></li>
+                        <li><a href="/console"><img src="../static/images/icons/comments.png" /> Console</a></li>
+                        <li><a href="/backups"><img src="../static/images/icons/disk.png" /> Backups</a></li>
+                    </ul>
+                </div>
+            </div>
+            <br class="clearfix">
+            <div class="block" id="playerlist">
+                <div class="navtop">
+                    {{ players|count }} Player(s)
+                </div>
+                {% for player in players %}
+                    <p>
+                        <a href="/player/{{ player }}" style="color: #222; font-size: 120%;">{{ player }}</a>
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="block">
+                <div class="navtop">
+                    {{ server_name }}
+                    <input type="button" value="Refresh" class="button" onClick="window.location.reload()" style="float: right">
+                </div>
+                <h1>Console</h1>
+                <hr/>
+
+                <table border="0">
+                    <tr>
+                        <td>
+                            <form action="/do" method="post">
+                                <input type="hidden" name="action" value="butcher">
+                                <input type="submit" value="Butcher Enemies">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/do" method="post">
+                                <input type="hidden" name="action" value="meteor">
+                                <input type="submit" value="Spawn a Meteor">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+                <div border="1">
+                    <form action="/do" method="post">
+                        <input type="hidden" name="action" value="broadcast">
+                        Broadcast a message to the server chat
+                        <input type="text" name="text">
+                        <input type="submit">
+                    </form>
+                </div>
+                <div style="                    color: #ccc;
+                                                        background-color: #000;
+                                                        font-size: 11px;
+                                                        margin-right: 10px;
+                                                        margin-left: 10px;
+                                                        margin-top: 10px;
+                                                        margin-bottom: 5px;
+                                                        height: 525px;
+                                                        width: 525px;
+                                                        border: solid 1px;
+                                                        border-bottom-left-radius: 8px;
+                                                        border-top-right-radius: 8px;">
+                            <span style="font-family: monospace, courier;">
+                                $FUNC_LOG_TAIL
+                                <hr width="100%">
+                                <form action="/do" method="post">
+                                    <input type="hidden" name="action" value="cmd">
+                                    <span style="color: #fcfcfc"><b><i>Send a command to the server console</i></b></span>
+                                    <input type="text" name="text"><input type="submit">
+                                </form>
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

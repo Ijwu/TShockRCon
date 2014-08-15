@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+{% block body %}
+<div class="logo-login">
+    <img src="../static/images/newlogo.png" height="80px" />
+</div>
+<div class="login">
+<h1>{{ server_name }} Login</h1>
+<hr />
+<form class="center" action="/" method="post">
+    Username: <input name="username" type="text" size="30" maxlength="30">
+    <br>
+    Password: <input name="password" type="password" size="30" maxlength="30">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</div>
+{% endblock %}

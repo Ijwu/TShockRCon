@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TShockPyAdmin Login</title>
+
+        <meta charset="ISO-8859-1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="generator" content="Webocton - Scriptly (www.scriptly.de)">
+
+        <link href="{{ url_for("static", filename="bootstrap.min.css") }}" type="text/css" rel="stylesheet">
+        <link href="{{ url_for("static", filename="style.css") }}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <div class="navigation">
+                <a href="/?page=status">Home</a> | <a href="http://tshock.co/xf/index.php?forum/">TShock Forums</a> | <a href="https://tshock.atlassian.net/wiki/display/TSHOCKPLUGINS/Home">Wiki</a> | <a href="http://ci.tshock.co/">Latest Builds</a>
+            </div>
+            {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                {% if errors %}
+                    <ul class="flash error">
+                    {% for message in errors %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            {% with flashes = get_flashed_messages(category_filter=["notice"]) %}
+                {% if flashes %}
+                    <ul class="flash">
+                    {% for message in flashes %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div class="container">
+            {% block body %}
+            
+            {% endblock %}
+            </div>
+            <div class="footer">Template and Design by Gravemind | Zombiehouse 2008-2011</div>
+            {% block javascript %}
+                <script src="{{ url_for("static", filename="bootstrap.min.js") }}"></script>
+            {% endblock %}
+       </div>
+    </body>
+</html>

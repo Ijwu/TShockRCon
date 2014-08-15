@@ -1,0 +1,10 @@
+{% macro logo_with_user(user) -%}
+    <div class="logo">
+        <img src="../static/images/newlogo.png" height="80px" />
+        <p style="color: #000">
+            <img src="../static/images/icons/user_orange.png" />
+            Logged in as {{ user }}.
+            <a style="color: #ce7c03" href="/logout">Log out</a>
+        </p>
+    </div>
+{%- endmacro %}

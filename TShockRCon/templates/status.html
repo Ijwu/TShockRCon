@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block body %}
+<div class="row">
+    {{ macros.logo_with_user(user_name) }}
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="block">
+            <div class="navtop">
+                Navigation
+            </div>
+            <div class="navcontainer">
+                <ul>
+                    <li><a href="/status"><img src="../static/images/icons/computer.png" /> Server Info</a></li>
+                    <li><a href="/console"><img src="../static/images/icons/comments.png" /> Console</a></li>
+                    <li><a href="/backups"><img src="../static/images/icons/disk.png" /> Backups</a></li>
+                </ul>
+            </div>
+        </div>
+        <br class="clearfix">
+        <div class="block" id="playerlist">
+            <div class="navtop">
+                {{ players|count }} Player(s)
+            </div>
+            {% for player in players %}
+                <p>
+                    <a href="/player/{{ player }}" style="color: #222; font-size: 120%;">{{ player }}</a>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="block">
+            <div class="navtop">
+                Serverinfo
+                <input type="button" value="Refresh" class="button" onClick="window.location.reload()" style="float: right;">
+            </div>
+            <h1>{{ server_name }}</h1>
+            <hr />
+            <ul class="info-list">
+                <li><b>World Name: </b>{{ world_name }}</li>
+                <li><b>Size: </b>{{ world_size }}</li>
+                <li><b>Current Time: </b>{{ world_time }}</li>
+                <li><b>Bloodmoon?: </b>{{ world_bloodmoon }}</li>
+                <li><b>Invasion Size: </b>{{ world_invasion }}</li>
+            </ul>
+            <!-- WTF is this?
+            <div style="font-size: 80%; padding-left: 20px; padding-bottom: 20px; padding-top: 20px;">
+                <span style="font-size: 120%; font-weight: bold;">Last seen web users</span>
+                $_START
+                <div><b>$FUNC_LAST_SEEN_#_NAME</b> &nbsp;&nbsp; <i>$FUNC_LAST_SEEN_#_TIME</i></div>
+                $_END
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+{% endblock %}
